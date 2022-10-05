@@ -122,7 +122,13 @@ function searchRecipes() {
 	if (!search || !search.length) {
 		filteredRecipes = [...data]
 	} else {
-		filteredRecipes = data.filter((recipe) => recipe.name.toLowerCase().includes(search) || recipe.ingredients.find((ing) => ing.ingredient.toLowerCase().includes(search)) || recipe.description.toLowerCase().includes(search))
+		filteredRecipes = []
+
+		for (const recipe of data) {
+			if (recipe.name.toLowerCase().includes(search) || recipe.ingredients.find((ing) => ing.ingredient.toLowerCase().includes(search)) || recipe.description.toLowerCase().includes(search)) {
+				filteredRecipes.push(recipe)
+			}
+		}
 	}
 	searchRecipesWithTags()
 }
